@@ -3,9 +3,9 @@ import React from 'react';
 import { Great_Vibes } from '@next/font/google';
 
 const greatVibes = Great_Vibes({
-  weight: ['400'], 
-  subsets: ['latin'], 
-  display: 'swap', 
+  weight: ['400'],
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 const Createthebest = () => {
@@ -53,28 +53,28 @@ const Createthebest = () => {
           </div>
 
           {/* Right Side */}
-          <div className="w-full md:w-1/2 flex flex-col items-center space-y-4">
-            <Image 
-              src="/pictures/img2.png" 
-              alt="img" 
-              width={650} 
-              height={320} 
-              className="w-full max-w-md md:max-w-full"
+          <div className="w-full md:w-1/2 flex flex-col items-center space-y-6">
+            <Image
+              src="/pictures/img2.png"
+              alt="Main image"
+              width={650}
+              height={320}
+              className="w-full rounded-md"
             />
-            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-              <Image 
-                src="/pictures/img3.png" 
-                alt="img" 
-                width={280} 
-                height={194} 
-                className="w-full max-w-xs md:max-w-full"
+            <div className="flex flex-wrap justify-center md:justify-between gap-4">
+              <Image
+                src="/pictures/img3.png"
+                alt="Small image 1"
+                width={280}
+                height={194}
+                className="w-full max-w-[47%] rounded-md"
               />
-              <Image 
-                src="/pictures/img4.png" 
-                alt="img" 
-                width={280} 
-                height={194} 
-                className="w-full max-w-xs md:max-w-full"
+              <Image
+                src="/pictures/img4.png"
+                alt="Small image 2"
+                width={280}
+                height={194}
+                className="w-full max-w-[47%] rounded-md"
               />
             </div>
           </div>

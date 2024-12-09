@@ -10,24 +10,26 @@ const page = () => {
       <Navbar />
 
       <div className="relative">
-        {/* First Image */}
-        <Image
-          src="/pictures/ourmenu.png"
-          alt="menu"
-          width={1920}
-          height={410}
-        />
+  {/* First Image */}
+  <Image
+    src="/pictures/ourmenu.png"
+    alt="menu"
+    width={1920}
+    height={550} 
+    className="w-full object-cover"
+  />
 
-        {/* Second Image (Centered) */}
-        <div className="absolute inset-0 flex justify-center items-center">
-          <Image
-            src="/pictures/blogdetails.png"
-            alt="ourmenu"
-            width={219}
-            height={104}
-          />
-        </div>
-      </div>
+  {/* Second Image (Centered) */}
+  <div className="absolute inset-0 flex justify-center items-center">
+    <Image
+      src="/pictures/Our Menu.png"
+      alt="ourmenu"
+      width={219}
+      height={104}
+      className="max-w-full h-auto"
+    />
+  </div>
+</div>
 
       {/* Blog Content */}
       <div className="max-w-5xl mx-auto px-6 lg:px-20 py-10 space-y-8">

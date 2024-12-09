@@ -10,24 +10,27 @@ const Page = () => {
       <Navbar />
 
       <div className="relative">
-        {/* First Image */}
-        <Image
-          src="/pictures/ourmenu.png"
-          alt="menu"
-          width={1920}
-          height={410}
-        />
-        
-        {/* Second Image (Centered) */}
-        <div className="absolute inset-0 flex justify-center items-center">
-          <Image
-            src="/pictures/bloglist.png"
-            alt="ourmenu"
-            width={219}
-            height={104}
-          />
-        </div>
-      </div>
+  {/* First Image */}
+  <Image
+    src="/pictures/ourmenu.png"
+    alt="menu"
+    width={1920}
+    height={550} 
+    className="w-full object-cover"
+  />
+
+  {/* Second Image (Centered) */}
+  <div className="absolute inset-0 flex justify-center items-center">
+    <Image
+      src="/pictures/Our Menu.png"
+      alt="ourmenu"
+      width={219}
+      height={104}
+      className="max-w-full h-auto"
+    />
+  </div>
+</div>
+
 
       {/* Blog Posts */}
       {['10 Reasons To Do A Digital Detox Challenge', 'Traditional Soft Pretzels with Sweet Beer Cheese', 'The Ultimate Hangover Burger: Egg in a Hole Burger', 'My Favorite Easy Black Pizza Toast Recipe'].map((title, index) => (

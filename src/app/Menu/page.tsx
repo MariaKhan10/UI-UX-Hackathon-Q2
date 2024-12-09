@@ -10,24 +10,27 @@ const Page = () => {
     <div>
       <Navbar />
       <div className="relative">
-        {/* First Image */}
-        <Image
-          src="/pictures/ourmenu.png"
-          alt="menu"
-          width={1920}
-          height={410}
-        />
+  {/* First Image */}
+  <Image
+    src="/pictures/ourmenu.png"
+    alt="menu"
+    width={1920}
+    height={550} 
+    className="w-full object-cover"
+  />
 
-        {/* Second Image (Centered) */}
-        <div className="absolute inset-0 flex justify-center items-center">
-          <Image
-            src="/pictures/Our Menu.png"
-            alt="ourmenu"
-            width={219}
-            height={104}
-          />
-        </div>
-      </div>
+  {/* Second Image (Centered) */}
+  <div className="absolute inset-0 flex justify-center items-center">
+    <Image
+      src="/pictures/Our Menu.png"
+      alt="ourmenu"
+      width={219}
+      height={104}
+      className="max-w-full h-auto"
+    />
+  </div>
+</div>
+
 
       {/* Starter Menu */}
       <div className="flex flex-col md:flex-row justify-between px-8 md:px-14 py-12 space-y-6 md:space-y-0">

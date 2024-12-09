@@ -1,6 +1,6 @@
 "use client";
-import Link from 'next/link';
-import React, { useState } from 'react';
+import Link from "next/link";
+import React, { useState } from "react";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { FiUser, FiMenu } from "react-icons/fi";
 import { PiTote } from "react-icons/pi";
@@ -9,9 +9,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="bg-black/100 w-full h-[80px] flex items-center px-6">
+    <div className="bg-black w-full h-[80px] flex items-center px-6 md:h-[80px] relative">
       {/* Left Content */}
-      <div className="flex items-center ">
+      <div className="flex items-center">
         <h1 className="font-bold text-[24px] leading-8 text-[#FF9F0D]">
           Food
         </h1>
@@ -35,8 +35,8 @@ const Navbar = () => {
         {/* Menu Items */}
         <ul
           className={`${
-            isMenuOpen ? 'flex' : 'hidden'
-          } flex-col absolute top-[80px] left-0 w-full bg-black/90 text-center space-y-4 py-4 text-[#FFFFFF] md:relative md:top-0 md:w-auto md:flex md:flex-row md:space-x-6 md:space-y-0 md:justify-center`}
+            isMenuOpen ? "flex" : "hidden"
+          } flex-col absolute top-[80px] left-0 w-full bg-black/90 text-center space-y-4 py-4 text-[#FFFFFF] md:relative md:top-0 md:w-auto md:flex md:flex-row md:space-x-6 md:space-y-0 md:justify-center z-50`}
         >
           <li className="hover:text-[#FF9F0D]">
             <Link href="/">Home</Link>
