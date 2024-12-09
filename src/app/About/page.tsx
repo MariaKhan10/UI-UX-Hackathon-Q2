@@ -28,7 +28,7 @@ const page = () => {
   {/* Second Image (Centered) */}
   <div className="absolute inset-0 flex justify-center items-center">
     <Image
-      src="/pictures/Our Menu.png"
+      src="/pictures/aboutus.png"
       alt="ourmenu"
       width={219}
       height={104}
