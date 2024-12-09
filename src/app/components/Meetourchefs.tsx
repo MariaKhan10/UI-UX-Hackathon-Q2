@@ -13,42 +13,42 @@ const Meetourchefs = () => {
     <div className="bg-black/100 text-center py-12">
       {/* Title Section */}
       <h1
-        className={`${greatVibes.className} font-normal text-[32px] leading-10 text-[#FF9F0D]`}
+        className={`${greatVibes.className} font-normal text-[24px] md:text-[32px] leading-8 md:leading-10 text-[#FF9F0D]`}
       >
         Chefs
       </h1>
-      <div className="flex justify-center mt-4">
-        <span className="text-[#FF9F0D] font-bold text-[60px] leading-[68px]">
+      <div className="flex flex-wrap justify-center mt-4">
+        <span className="text-[#FF9F0D] font-bold text-[40px] md:text-[60px] leading-[48px] md:leading-[68px]">
           Me
         </span>
-        <span className="font-bold text-[60px] leading-[68px] text-[#FFFFFF]">
+        <span className="font-bold text-[40px] md:text-[60px] leading-[48px] md:leading-[68px] text-[#FFFFFF]">
           et Our Chef
         </span>
       </div>
 
       {/* Images Section */}
-      <div className="flex flex-wrap justify-center items-center gap-6 mt-8 cursor-pointer">
+      <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mt-8 cursor-pointer">
         <Image
           src="/pictures/Chef card1.png"
-          alt="Food Item 1"
+          alt="Chef 1"
           width={275}
           height={329}
         />
         <Image
           src="/pictures/Chef card2.png"
-          alt="Food Item 2"
+          alt="Chef 2"
           width={275}
           height={329}
         />
         <Image
           src="/pictures/Card 3.png"
-          alt="Food Item 3"
+          alt="Chef 3"
           width={275}
           height={329}
         />
         <Image
           src="/pictures/Card 4.png"
-          alt="Food Item 4"
+          alt="Chef 4"
           width={275}
           height={329}
         />

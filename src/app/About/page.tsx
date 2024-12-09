@@ -91,7 +91,50 @@ const page = () => {
             Show More
           </button>
         </div>
+
+
+
+
+
       </div>
+
+
+
+
+    <div className="bg-black/100 text-center py-12">
+      {/* Title Section */}
+      <h1
+        className={`${greatVibes.className} font-normal text-[24px] md:text-[32px] leading-8 md:leading-10 text-[#FF9F0D]`}
+      >
+      
+      </h1>
+      <div className="flex flex-wrap justify-center mt-4">
+        <span className="text-[#FF9F0D] font-bold text-[40px] md:text-[60px] leading-[48px] md:leading-[68px]">
+        
+        </span>
+        <span className="font-bold text-[40px] md:text-[60px] leading-[48px] md:leading-[68px] text-[#FFFFFF]">
+          Why Choose Us
+        </span>
+        <br/>
+        <p className='mt-8 text-white font-normal text-[16px] leading-6'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque diam pellentesque bibendum non dui volutpat fringilla bibendum. </p>
+      </div>
+      <br/>
+
+      {/* Images Section */}
+      <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mt-8 cursor-pointer">
+        <Image
+          src="/pictures/aboutus4.png"
+          alt="Chef 1"
+          width={1280}
+          height={386}
+        />
+      
+      
+      </div>
+    </div>
+  
+
+
 
       <Stillyouneed />
       <Footer />
