@@ -6,6 +6,11 @@ import Foodcategory from "./components/Foodcategory";
 import Clients from "./components/Clients";
 import Meetourchefs from "./components/Meetourchefs";
 import Stillyouneed from "./components/Stillyouneed";
+import Extraordinary from "./components/Extraordinary";
+import BlogPost from "./components/BlogPost";
+import Wedocument from "./components/Wedocument";
+import Testimonials from "./components/Testimonials";
+import Chooseandpick from "./components/Chooseandpick";
 
 export default function Home() {
   return (
@@ -13,8 +18,13 @@ export default function Home() {
       <Hero />
       <Createthebest />
       <Foodcategory />
+      <Extraordinary />
       <Clients />
+      <Chooseandpick />
       <Meetourchefs />
+      <Testimonials />
+      <Wedocument />
+      <BlogPost />
       <Stillyouneed />
       <Footer />
     </div>

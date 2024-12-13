@@ -10,7 +10,7 @@ const greatVibes = Great_Vibes({
 
 const Createthebest = () => {
   return (
-    <div className="w-full min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="w-full min-h-screen bg-black flex items-center justify-center p-4 py-28">
       <div className="w-full max-w-6xl">
         {/* Main Content */}
         <div className="flex flex-col md:flex-row justify-between items-start w-full">

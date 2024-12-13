@@ -30,7 +30,7 @@ const page = () => {
     <Image
       src="/pictures/aboutus.png"
       alt="ourmenu"
-      width={219}
+      width={160}
       height={104}
       className="max-w-full h-auto"
     />

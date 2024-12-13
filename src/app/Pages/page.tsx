@@ -24,7 +24,7 @@ const page = () => {
     <Image
       src="/pictures/blogdetails.png"
       alt="ourmenu"
-      width={219}
+      width={190}
       height={104}
       className="max-w-full h-auto"
     />

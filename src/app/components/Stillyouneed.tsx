@@ -11,7 +11,7 @@ const Stillyouneed = () => {
             <span className="text-[#FF9F0D] font-bold text-[24px] md:text-[32px] leading-[32px] md:leading-[40px]">
               St
             </span>
-            <span className="font-bold text-[24px] md:text-[32px] leading-[32px] md:leading-[40px] text-[#FFFFFF] ml-1">
+            <span className="font-bold text-[24px] md:text-[32px] leading-[32px] md:leading-[40px] text-[#FFFFFF]">
               ill You Need Our Support?
             </span>
           </div>
