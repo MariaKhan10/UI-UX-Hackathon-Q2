@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Stillyouneed from '../components/Stillyouneed'
 import Footer from '../components/Footer'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Page = () => {
   return (
@@ -46,9 +47,11 @@ const Page = () => {
           <p className="text-[#4F4F4F] font-normal text-[16px] leading-6 mt-2 text-center md:text-left">
             At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
           </p>
+          <Link href="/BlogDetails">
           <button className="text-[#FF9F0D] border border-[#FF9F0D] px-4 py-2 rounded mt-4 block mx-auto md:mx-0">
             Read More
-          </button>
+          </button></Link>
+          
         </div>
       ))}
 

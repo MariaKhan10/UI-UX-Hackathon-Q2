@@ -1,10 +1,11 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const Footer = () => {
   return (
     <div className="bg-black">
-      <footer className="text-white body-font">
+      <footer className="text-white body-font -mt-5">
         <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
             {/* Placeholder for additional content like a logo */}
@@ -51,8 +52,9 @@ const Footer = () => {
                 Help?
               </h2>
               <nav className="list-none mb-10 space-y-4">
-                <li><a className="text-white hover:text-gray-600 cursor-pointer">FAQ</a></li>
-                <li><a className="text-white hover:text-gray-600 cursor-pointer">Terms & Conditions</a></li>
+
+              <li><Link href="/FAQ" className="text-white hover:text-gray-600 cursor-pointer">FAQ</Link></li>
+                <li><Link href="/Ourchefs"className="text-white hover:text-gray-600 cursor-pointer">Terms & Conditions</Link></li>
                 <li><a className="text-white hover:text-gray-600 cursor-pointer">Reporting</a></li>
                 <li><a className="text-white hover:text-gray-600 cursor-pointer">Documentation</a></li>
                 <li><a className="text-white hover:text-gray-600 cursor-pointer">Support Policy</a></li>

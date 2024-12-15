@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { Great_Vibes } from '@next/font/google';
+import Link from 'next/link';
 
 const greatVibes = Great_Vibes({
   weight: ['400'],
@@ -46,9 +47,10 @@ const Createthebest = () => {
               &#10003; &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit
             </p>
             <div className="flex justify-center md:justify-start">
-              <button className="w-[160px] md:w-[190px] h-[50px] md:h-[60px] mt-8 bg-[#FF9F0D] text-white rounded-3xl">
+            <Link href="/404"> <button className="w-[160px] md:w-[190px] h-[50px] md:h-[60px] mt-8 bg-[#FF9F0D] text-white rounded-3xl">
                 Read More
               </button>
+              </Link>
             </div>
           </div>
 
