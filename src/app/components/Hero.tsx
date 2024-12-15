@@ -343,11 +343,11 @@ const Hero = () => {
       </li>
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/Checkout">Checkout</Link>
+      </li>
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/BlogDetails">BlogDetails</Link>
       </li>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+        <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/FAQ">FAQ</Link>
       </li>
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
