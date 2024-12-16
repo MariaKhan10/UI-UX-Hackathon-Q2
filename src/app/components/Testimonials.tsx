@@ -28,7 +28,7 @@ const Testimonials = () => {
       {/* White Box Section */}
       <div className="relative mt-12 w-full flex justify-center">
         {/* Human Image */}
-        <div className="absolute -top-8 md:-top-1 z-10">
+        <div className="absolute md:-top-1 z-10">
           <Image
             src="/pictures/human.png"
             alt="Human"

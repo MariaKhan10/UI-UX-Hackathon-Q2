@@ -12,48 +12,48 @@ const Extraordinary = () => {
   return (
     <div className="bg-black/100 px-4 md:px-12 lg:px-20 py-32">
       <div className="flex flex-col lg:flex-row justify-between items-start">
-         {/* Left Side - Images */}
-         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-4">
-          {/* Row 1 */}
-          <Image
-            className="cursor-pointer"
-            src="/pictures/extra1.png"
-            alt="icon"
-            width={270}
-            height={320}
-          />
-          <Image
-            className="cursor-pointer mt-6 sm:mt-24 sm:-ml-2"
-            src="/pictures/extra2.png"
-            alt="icon"
-            width={210}
-            height={180}
-          />
+        {/* Left Side - Images */}
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-4">
+  {/* Row 1 */}
+  <Image
+    className="cursor-pointer sm:w-[270px] sm:h-[320px] w-full h-auto object-cover"
+    src="/pictures/extra1.png"
+    alt="icon"
+    width={270}
+    height={320}
+  />
+  <Image
+    className="cursor-pointer sm:w-[210px] sm:h-[180px] w-full h-auto object-cover mt-6 sm:mt-[138px] sm:-ml-2"
+    src="/pictures/extra2.png"
+    alt="icon"
+    width={210}
+    height={180}
+  />
 
-          {/* Row 2 */}
-          <Image
-            className="cursor-pointer"
-            src="/pictures/extra3.png"
-            alt="icon"
-            width={180}
-            height={290}
-          />
-          <Image
-            className="cursor-pointer sm:-ml-24"
-            src="/pictures/extra4.png"
-            alt="icon"
-            width={160}
-            height={180}
-          />
-          <Image
-            className="cursor-pointer sm:ml-0"
-            src="/pictures/extra5.png"
-            alt="icon"
-            width={120}
-            height={141}
-          />
-         
-        </div>
+  {/* Row 2 */}
+  <Image
+    className="cursor-pointer sm:w-[180px] sm:h-[290px] w-full h-auto object-cover"
+    src="/pictures/extra3.png"
+    alt="icon"
+    width={180}
+    height={290}
+  />
+  <Image
+    className="cursor-pointer sm:w-[160px] sm:h-[180px] w-full h-auto object-cover sm:-ml-24"
+    src="/pictures/extra4.png"
+    alt="icon"
+    width={160}
+    height={180}
+  />
+  <Image
+    className="cursor-pointer sm:w-[120px] sm:h-[141px] w-full max-w-[150px] h-auto object-cover sm:ml-0"
+    src="/pictures/extra5.png"
+    alt="icon"
+    width={120}
+    height={141}
+  />
+</div>
+
 
         {/* Right Side - Content */}
         <div className="mt-8 lg:mt-0 lg:ml-12 flex-1">

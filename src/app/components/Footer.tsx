@@ -24,26 +24,27 @@ const Footer = () => {
                   </p>
                 </li>
 
+                <div className="flex flex-col items-center lg:flex-row md:flex-row gap-2 sm:gap-4 sm:justify-center">
+  <div>
+    <Image
+      className="w-[70px] h-[70px] sm:mb-2"
+      src="/pictures/Watch.png"
+      alt="img"
+      width={60}
+      height={50}
+    />
+  </div>
+  <div className="text-center sm:text-left">
+    <li className="text-white">
+      <p className="hover:text-gray-600 font-bold text-[14px] leading-6">
+        Opening Hours
+      </p>
+      <p className="font-normal text-[14px] leading-6">Mon - Sat (8.00 - 6.00)</p>
+      <p className="font-normal text-[14px] leading-6">Sunday - Closed</p>
+    </li>
+  </div>
+</div>
 
-                <div className="flex lg:flex-row md:flex-row gap-2 sm:justify-center sm:flex-wrap sm:flex-col">
-                  <div>  <Image
-    className="w-[70px] h-[70px] sm:mb-2 "
-    src="/pictures/Watch.png"
-    alt="img"
-    width={60}
-    height={50}
-  /></div>
-<div>
-<li className="text-white">
-    <p className="hover:text-gray-600 font-bold text-[14px] leading-6">
-      Opening Hours 
-    </p>
-    <p className="font-normal text-[14px] leading-6">Mon - Sat (8.00 - 6.00)</p> 
-    <p className="font-normal text-[14px] leading-6">Sunday - Closed</p>
-  </li>
-</div>
-  
-</div>
 
 
                
