@@ -303,10 +303,7 @@ const Hero = () => {
 
 
 
-{/* Pages  */}
-
-
-<li className="hover:text-[#FF9F0D] relative">
+                <li className="hover:text-[#FF9F0D] relative">
   <button
     onClick={(e) => {
       e.stopPropagation(); // Prevent closing when clicking the button
@@ -331,7 +328,7 @@ const Hero = () => {
     </svg>
   </button>
   {isPagesOpen && (
-    <ul className="absolute top-full left-1/2 transform -translate-x-1/2 bg-[#FFFFFF] text-[#000000] mt-1 space-y-2 py-2 shadow-lg rounded z-50">
+    <ul className="absolute top-full left-0 ml-14 bg-[#FFFFFF] text-[#000000] space-y-2 py-2 shadow-lg rounded z-50">
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/Ourchefs">Ourchefs</Link>
       </li>
@@ -347,18 +344,15 @@ const Hero = () => {
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/BlogDetails">BlogDetails</Link>
       </li>
-        <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/FAQ">FAQ</Link>
       </li>
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/404">404</Link>
       </li>
-      
     </ul>
   )}
 </li>
-
-
 
 
 
@@ -392,7 +386,7 @@ const Hero = () => {
     </svg>
   </button>
   {isShopOpen && (
-    <ul className="absolute top-full left-1/2 transform -translate-x-1/2 bg-[#FFFFFF] text-[#000000] mt-1 space-y-2 py-2 shadow-lg rounded z-50">
+    <ul className="absolute top-full left-0 ml-14 bg-[#FFFFFF] text-[#000000] space-y-2 py-2 shadow-lg rounded z-50">
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/ShopList">Shop List</Link>
       </li>

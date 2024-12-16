@@ -12,7 +12,7 @@ const Footer = () => {
           </div>
           <div className="flex-grow flex flex-wrap md:flex-row lg:flex-row md:pr-20 -mb-10 md:text-left text-center gap-y-8 lg:w-1/4">
             {/* About Us */}
-            <div className="lg:-ml-28 md:-ml-28 mx-auto lg:w-1/4 md:w-1/2 w-full px-8">
+            <div className="lg:-ml-28 md:-ml-28 mx-auto lg:w-1/4 md:w-1/2 w-full px-1">
 
               <h2 className="title-font font-bold leading-8 tracking-widest text-lg mb-3 hover:text-gray-600 cursor-pointer">
                 About Us
@@ -23,11 +23,30 @@ const Footer = () => {
                     Corporate clients and leisure travelers rely on Groundlink for dependable, safe, and professional chauffeured car service in major cities worldwide.
                   </p>
                 </li>
-                <li>
-                  <p className="text-white hover:text-gray-600">
-                    Opening Hours: Mon - Sat (8.00 - 6.00), Sunday - Closed
-                  </p>
-                </li>
+
+
+                <div className="flex lg:flex-row md:flex-row gap-2 sm:justify-center sm:flex-wrap sm:flex-col">
+                  <div>  <Image
+    className="w-[70px] h-[70px] sm:mb-2 "
+    src="/pictures/Watch.png"
+    alt="img"
+    width={60}
+    height={50}
+  /></div>
+<div>
+<li className="text-white">
+    <p className="hover:text-gray-600 font-bold text-[14px] leading-6">
+      Opening Hours 
+    </p>
+    <p className="font-normal text-[14px] leading-6">Mon - Sat (8.00 - 6.00)</p> 
+    <p className="font-normal text-[14px] leading-6">Sunday - Closed</p>
+  </li>
+</div>
+  
+</div>
+
+
+               
               </nav>
             </div>
 
@@ -54,7 +73,7 @@ const Footer = () => {
               <nav className="list-none mb-10 space-y-4">
 
               <li><Link href="/FAQ" className="text-white hover:text-gray-600 cursor-pointer">FAQ</Link></li>
-                <li><Link href="/Ourchefs"className="text-white hover:text-gray-600 cursor-pointer">Terms & Conditions</Link></li>
+                <li><a className="text-white hover:text-gray-600 cursor-pointer">Terms & Conditions</a></li>
                 <li><a className="text-white hover:text-gray-600 cursor-pointer">Reporting</a></li>
                 <li><a className="text-white hover:text-gray-600 cursor-pointer">Documentation</a></li>
                 <li><a className="text-white hover:text-gray-600 cursor-pointer">Support Policy</a></li>
