@@ -1,15 +1,51 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
-import Stillyouneed from '../components/Stillyouneed';
-import Footer from '../components/Footer';
-import Image from 'next/image';
+"use client";
 
-const page = () => {
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Stillyouneed from "../components/Stillyouneed";
+import Footer from "../components/Footer";
+import Image from "next/image";
+import Link from "next/link";
+import { useCart } from "../context/CartContext";
+
+
+
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+};
+
+const ShopList = () => {
+  const { addToCart } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetch("/api/products") // Adjust API route if needed
+      .then((res) => res.json())
+      .then((data: Product[]) => setProducts(data))
+      .catch((err) => console.error("Error fetching products:", err));
+  }, []);
+
+  type CartItem = Product & { quantity: number; total: number }; // Include `total` in CartItem
+
+  const handleAddToCart = (product: Product) => {
+    const cartItem: CartItem = {
+      ...product,
+      quantity: 1,
+      total: product.price, // Calculate total
+    };
+    console.log("Adding to cart:", cartItem); // Log for debugging
+    addToCart(cartItem); // Pass the cartItem to addToCart
+    alert(`${product.name} added to cart!`);
+  };
+  
+
   return (
     <div>
       <Navbar />
       <div className="relative">
-        {/* First Image */}
         <Image
           src="/pictures/ourmenu.png"
           alt="menu"
@@ -19,12 +55,8 @@ const page = () => {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-6 my-6 px-4">
-        {/* Sort By */}
         <div className="flex items-center gap-2">
-          <label
-            htmlFor="sort-by"
-            className="text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="sort-by" className="text-sm font-medium text-gray-700">
             Sort By:
           </label>
           <select
@@ -38,8 +70,6 @@ const page = () => {
             <option value="rating">Highest Rating</option>
           </select>
         </div>
-
-        {/* Show */}
         <div className="flex items-center gap-2">
           <label htmlFor="show" className="text-sm font-medium text-gray-700">
             Show:
@@ -58,33 +88,33 @@ const page = () => {
         </div>
       </div>
 
-      {/* Image Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 sm:px-8 lg:px-24 mt-20 mb-20">
-        {[
-          '/pictures/shop1.png',
-          '/pictures/shop2.png',
-          '/pictures/shop3.png',
-          '/pictures/shop4.png',
-          '/pictures/shop5.png',
-          '/pictures/shop6.png',
-          '/pictures/shop7.png',
-          '/pictures/shop8.png',
-          '/pictures/shop9.png',
-          '/pictures/shop4.png',
-          '/pictures/shop5.png',
-          '/pictures/shop6.png',
-          '/pictures/shop7.png',
-          '/pictures/shop8.png',
-          '/pictures/shop9.png',
-        ].map((src, index) => (
-          <Image
-            key={index}
-            src={src}
-            alt={`shop-${index + 1}`}
-            width={312}
-            height={330}
-            className="rounded shadow-lg cursor-pointer"
-          />
+        {products.map((product) => (
+          <div key={product.id} className="rounded shadow-lg p-4 bg-white">
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={312}
+              height={330}
+              className="rounded cursor-pointer"
+            />
+            <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
+            <p className="text-gray-600">Price: Rs {product.price}</p>
+            <div className="flex gap-4 mt-4">
+              <Link
+                href={`/shop/${product.id}`}
+                className="bg-indigo-500 text-white py-2 px-6 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                View Details
+              </Link>
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="bg-orange-500 text-white py-2 px-6 rounded-md shadow-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
         ))}
       </div>
 
@@ -94,4 +124,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ShopList;

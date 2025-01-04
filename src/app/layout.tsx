@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "./components/Footer";
 import Stillyouneed from "./components/Stillyouneed";
+import { CartProvider } from "./context/CartContext"; // Import the CartProvider
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,11 +30,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      > 
-  
-        {children}
+      >
+        <CartProvider>
+          {children}
+        </CartProvider>
+        {/* Uncomment these if you need them */}
         {/* <Stillyouneed /> */}
-      {/* <Footer /> */}
+        {/* <Footer /> */}
       </body>
     </html>
   );

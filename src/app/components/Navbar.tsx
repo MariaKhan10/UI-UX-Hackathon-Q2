@@ -4,8 +4,13 @@ import React, { useState } from "react";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { FiUser, FiMenu } from "react-icons/fi";
 import { PiTote } from "react-icons/pi";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
+  const { cartItems } = useCart();
+
+  // Calculate total items in the cart
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isShopOpen, setIsShopOpen] = useState(false); // State for "Shop" dropdown
    const [isPagesOpen, setIsPagesOpen] = useState(false);
@@ -19,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-black w-full h-[80px] flex items-center px-6 md:h-[80px] relative">
+    <div className="w-full h-[80px] flex items-center px-6 md:h-[80px] sticky top-0 bg-black z-50 shadow-lg ">
       {/* Left Content */}
       <div className="flex items-center">
         <h1 className="font-bold text-[24px] leading-8 text-[#FF9F0D]">
@@ -40,6 +45,16 @@ const Navbar = () => {
           >
             <FiMenu />
           </button>
+          <div className="relative inline-block">
+        <Link href="/ShoppingCart">
+          <PiTote className="text-white text-[22px] hover:text-[#FF9F0D] cursor-pointer ml-3 " />
+        </Link>
+        {totalItems > 0 && (
+          <span className="absolute top-[-8px] right-[-8px] bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+            {totalItems}
+          </span>
+        )}
+      </div>
         </div>
 
         {/* Menu Items */}
@@ -202,9 +217,7 @@ const Navbar = () => {
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/ShopList">Shop List</Link>
       </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/ShopDetails">Shop Details</Link>
-      </li>
+      
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/ShoppingCart">Shopping Cart</Link>
       </li>
@@ -226,9 +239,16 @@ const Navbar = () => {
   <FiUser className="text-white text-[20px] hover:text-[#FF9F0D] cursor-pointer" />
 </Link>
 
-<Link href="/ShoppingCart">
-<PiTote className="text-white text-[20px] hover:text-[#FF9F0D] cursor-pointer" />
-</Link>
+<div className="relative inline-block">
+        <Link href="/ShoppingCart">
+          <PiTote className="text-white text-[20px] hover:text-[#FF9F0D] hover:font-bold hover:text-[24px] cursor-pointer transition-all duration-300 ease-in-out" />
+        </Link>
+        {totalItems > 0 && (
+          <span className="absolute top-[-8px] right-[-8px] bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+            {totalItems}
+          </span>
+        )}
+      </div>
         
       </div>
     </div>

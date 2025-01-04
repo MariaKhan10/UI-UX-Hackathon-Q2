@@ -1,11 +1,62 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
-import Stillyouneed from '../components/Stillyouneed';
-import Footer from '../components/Footer';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+"use client";
+import React, { useState } from "react";
+import Navbar from "../components/Navbar";
+import Stillyouneed from "../components/Stillyouneed";
+import Footer from "../components/Footer";
+import Image from "next/image";
+import Link from "next/link";
+import { useCart } from "../context/CartContext";
 
 const Page = () => {
+  const { cartItems, cartSubtotal, shippingCharge, totalAmount } = useCart();
+  const [orderPlaced, setOrderPlaced] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    phoneNumber: "",
+    country: "",
+    city: "",
+    zipCode: "",
+    address1: "",
+    address2: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePlaceOrder = () => {
+    // Check if all required fields are filled
+    if (
+      !formValues.firstName ||
+      !formValues.lastName ||
+      !formValues.email ||
+      !formValues.company ||
+      !formValues.phoneNumber ||
+      !formValues.country ||
+      !formValues.city ||
+      !formValues.zipCode ||
+      !formValues.zipCode ||
+      !formValues.address1
+    ) {
+      setErrorMessage("Please fill in all required shipping address details before placing the order.");
+      setOrderPlaced(false);
+      return;
+    }
+
+    // Clear error message if form is valid
+    setErrorMessage("");
+    setOrderPlaced(true);
+
+    // Optional: Hide the success message after a few seconds
+    setTimeout(() => setOrderPlaced(false), 3000);
+  };
+
   return (
     <div>
       <Navbar />
@@ -26,7 +77,7 @@ const Page = () => {
       </div>
 
       {/* Left Section Starts */}
-      <div className="flex flex-col sm:flex-row p-10 sm:px-14 sm:py-10 gap-6">
+      <div className="flex flex-col sm:flex-row p-16 sm:px-14 sm:py-10 gap-6">
         <div className="w-full sm:w-1/2">
           <h1 className="text-xl font-bold text-gray-700 mb-4 mt-2">Shipping Address</h1>
 
@@ -41,6 +92,8 @@ const Page = () => {
                 id="firstName"
                 name="firstName"
                 placeholder="Enter your first name"
+                value={formValues.firstName}
+                onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               />
             </div>
@@ -55,6 +108,8 @@ const Page = () => {
                 id="lastName"
                 name="lastName"
                 placeholder="Enter your last name"
+                value={formValues.lastName}
+                onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               />
             </div>
@@ -69,6 +124,25 @@ const Page = () => {
                 id="email"
                 name="email"
                 placeholder="Enter your email address"
+                value={formValues.email}
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
+              />
+            </div>
+
+            
+            {/* Company */}
+            <div>
+              <label htmlFor="company" className="text-gray-700 font-medium">
+                Company
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                placeholder="Enter your company name"
+                value={formValues.company}
+                onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               />
             </div>
@@ -83,20 +157,8 @@ const Page = () => {
                 id="phoneNumber"
                 name="phoneNumber"
                 placeholder="Enter your phone number"
-                className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
-              />
-            </div>
-
-            {/* Company */}
-            <div>
-              <label htmlFor="company" className="text-gray-700 font-medium">
-                Company
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                placeholder="Enter your company"
+                value={formValues.phoneNumber}
+                onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               />
             </div>
@@ -109,9 +171,11 @@ const Page = () => {
               <select
                 id="country"
                 name="country"
+                value={formValues.country}
+                onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Choose Country
                 </option>
                 <option value="PAK">Pakistan</option>
@@ -130,9 +194,11 @@ const Page = () => {
               <select
                 id="city"
                 name="city"
+                value={formValues.city}
+                onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Choose City
                 </option>
                 <option value="Khi">Karachi</option>
@@ -153,6 +219,8 @@ const Page = () => {
                 id="zipCode"
                 name="zipCode"
                 placeholder="Enter your zip code"
+                value={formValues.zipCode}
+                onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               />
             </div>
@@ -167,10 +235,11 @@ const Page = () => {
                 id="address1"
                 name="address1"
                 placeholder="Enter your address"
+                value={formValues.address1}
+                onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               />
             </div>
-
             {/* Address 2 */}
             <div>
               <label htmlFor="address2" className="text-gray-700 font-medium">
@@ -181,13 +250,14 @@ const Page = () => {
                 id="address2"
                 name="address2"
                 placeholder="Enter your address"
+                value={formValues.address2}
+                onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               />
             </div>
           </div>
-
-          {/* Billing Address */}
-          <div className="mt-10">
+             {/* Billing Address */}
+             <div className="mt-10">
             <h1 className="text-xl font-bold text-gray-700 mb-4 mt-2">Billing Address</h1>
 
             {/* Same as Shipping Address Checkbox */}
@@ -231,69 +301,45 @@ const Page = () => {
           </div>
         </div>
 
+
         {/* Right Section Starts */}
-        <div className="w-full sm:w-1/3 px-8 py-6 gap-6 rounded-lg shadow-md mt-20">
+        <div className="w-full sm:w-1/3 px-8 py-6 gap-6 rounded-lg shadow-md mt-20 bg-white">
           <h2 className="text-xl font-bold text-gray-800 mb-4">Order Summary</h2>
 
-          {/* Items List */}
-          <div className="mb-4">
-            <ul className="space-y-4"> {/* Increased gap between items */}
-              <li className="flex justify-between text-gray-700">
-                <span>Item 1</span>
-                <span>$50.00</span>
+          <ul className="space-y-4">
+            {cartItems.map((item) => (
+              <li key={item.id} className="flex justify-between text-gray-700">
+                <span>{item.name}</span>
+                <span>${item.total.toFixed(2)}</span>
               </li>
-              <li className="flex justify-between text-gray-700">
-                <span>Item 2</span>
-                <span>$30.00</span>
-              </li>
-              <li className="flex justify-between text-gray-700">
-                <span>Item 3</span>
-                <span>$50.00</span>
-              </li>
-            </ul>
-          </div>
+            ))}
+          </ul>
 
-          <hr className="my-4 border-gray-300" />
-
-          {/* Calculations */}
-          <div className="space-y-4 text-gray-700">
-            <div className="flex justify-between">
-              <span>Sub-total</span>
-              <span>$130.00</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Shipping</span>
-              <span>$0.00</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Discount (25%)</span>
-              <span>-$32.50</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Tax</span>
-              <span>$56.70</span>
-            </div>
-          </div>
-
-          <hr className="my-4 border-gray-300" />
-
-          {/* Total */}
-          <div className="flex justify-between text-lg font-bold text-gray-800">
+          <div className="flex justify-between text-lg font-bold text-gray-800 mt-4">
             <span>Total</span>
-            <span>$154.20</span>
+            <span>${totalAmount.toFixed(2)}</span>
           </div>
 
-          {/* Place an Order Button */}
-          <Link href="">
-            <button
-              className="flex items-center justify-between w-full bg-[#FF9F0D] text-white hover:bg-[#e88d0c] focus:ring-2 focus:ring-orange-400 px-8 py-4 rounded-md mt-10"
-            >
-              <span>Place an Order</span>
-              <span className="text-xl">&rarr;</span>
-            </button>
-          </Link>
+          <button
+            onClick={handlePlaceOrder}
+            className="flex items-center justify-between w-full bg-[#FF9F0D] text-white hover:bg-[#e88d0c] focus:ring-2 focus:ring-orange-400 px-8 py-4 rounded-md mt-10"
+          >
+            <span>Place an Order</span>
+            <span className="text-xl">&rarr;</span>
+          </button>
+
+          {errorMessage && (
+            <div className="mt-6 p-4 rounded-md bg-red-100 text-red-800 text-center shadow-md">
+              {errorMessage}
+            </div>
+          )}
+
+          {orderPlaced && (
+            <div className="mt-6 p-4 rounded-md bg-green-100 text-green-800 text-center shadow-md">
+              Your order has been placed successfully!
+            </div>
+          )}
         </div>
-        {/* Right Section Ends */}
       </div>
 
       <Stillyouneed />
