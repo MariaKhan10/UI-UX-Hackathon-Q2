@@ -12,47 +12,50 @@ const Extraordinary = () => {
   return (
     <div className="bg-black/100 px-4 md:px-12 lg:px-20 py-32">
       <div className="flex flex-col lg:flex-row justify-between items-start">
-     {/* Left Side - Images */}
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-4">
+  {/* Left Side - Images */}
+<div className="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-4 lg:gap-4">
   {/* Row 1 */}
   <Image
-    className="cursor-pointer w-full h-auto object-cover sm:w-[270px] sm:h-[320px] mx-auto sm:mx-0"
+    className="cursor-pointer object-cover w-full h-full"
     src="/pictures/extra1.png"
     alt="icon"
-    width={270}
-    height={320}
+    width={150}
+    height={150}
   />
   <Image
-    className="lg:-ml-2 cursor-pointer w-full h-auto object-cover mt-6 sm:mt-[138px] sm:w-[210px] sm:h-[180px] mx-auto sm:mx-0"
+    className="cursor-pointer object-cover w-full h-full"
     src="/pictures/extra2.png"
     alt="icon"
-    width={210}
-    height={180}
+    width={150}
+    height={150}
   />
 
   {/* Row 2 */}
   <Image
-    className="cursor-pointer w-full h-auto object-cover sm:w-[180px] sm:h-[290px] mx-auto sm:mx-0"
+    className="cursor-pointer object-cover w-full h-full"
     src="/pictures/extra3.png"
     alt="icon"
-    width={180}
-    height={290}
+    width={150}
+    height={150}
   />
   <Image
-    className="lg:-ml-24 cursor-pointer w-full h-auto object-cover sm:w-[160px] sm:h-[180px] mx-auto sm:mx-0"
+    className="cursor-pointer object-cover w-full h-full"
     src="/pictures/extra4.png"
     alt="icon"
-    width={160}
-    height={180}
+    width={150}
+    height={150}
   />
+
+  {/* Fifth Image - Hidden on smaller screens */}
   <Image
-    className="cursor-pointer w-full h-auto object-cover sm:w-[120px] sm:h-[141px] mx-auto sm:mx-0"
+    className="hidden sm:block cursor-pointer object-cover w-full h-full"
     src="/pictures/extra5.png"
     alt="icon"
     width={120}
     height={141}
   />
 </div>
+
 
 
 
@@ -65,18 +68,24 @@ const Extraordinary = () => {
             Why Choose us
           </h1>
 
-          {/* Main Heading */}
-          <div className="flex flex-col md:flex-row mt-4 text-center lg:text-left">
-            <span className="text-[#FF9F0D] font-bold text-[48px] md:text-[60px]">
-              Ex
-            </span>
-            <span className="font-bold text-[48px] md:text-[60px] text-[#FFFFFF]">
-              tra ordinary taste
-            </span>
-          </div>
-          <p className="font-bold text-[48px] md:text-[60px] text-[#FFFFFF] text-center lg:text-left">
-            And Experienced
-          </p>
+        {/* Main Heading */}
+<div className="flex flex-col items-center lg:items-start mt-4 text-center lg:text-left">
+  <div className="flex">
+    <span className="text-[#FF9F0D] font-bold text-[48px] md:text-[60px]">
+      Ex
+    </span>
+    <span className="font-bold text-[48px] md:text-[60px] text-[#FFFFFF]">
+      tra ordinary
+    </span>
+  </div>
+  <span className="font-bold text-[48px] md:text-[60px] text-[#FFFFFF]">
+    taste
+  </span>
+  <span className="font-bold text-[48px] md:text-[60px] text-[#FFFFFF]">
+    And Experienced
+  </span>
+</div>
+
 
           {/* Description */}
           <p className="text-[#FFFFFF] text-[14px] md:text-[16px] mt-6 text-center lg:text-left">
