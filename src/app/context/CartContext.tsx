@@ -1,7 +1,6 @@
-"use client"
+"use client";
 import React, { createContext, useState, ReactNode, useEffect } from "react";
 
-// Define the types for your cart item
 type Product = {
   id: number;
   name: string;
@@ -11,13 +10,12 @@ type Product = {
 
 type CartItem = Product & { quantity: number; total: number };
 
-// Define the context type
 type CartContextType = {
   cartItems: CartItem[];
   cartSubtotal: number;
   shippingCharge: number;
   totalAmount: number;
-  addToCart: (product: CartItem) => void;
+  addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
   updateCartItem: (productId: number, quantity: number) => void;
@@ -25,20 +23,29 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-// CartProvider component
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartSubtotal, setCartSubtotal] = useState<number>(0);
-  const [shippingCharge, setShippingCharge] = useState<number>(0);
-  const [totalAmount, setTotalAmount] = useState<number>(0);
+  const [shippingCharge, setShippingCharge] = useState<number>(5); // Default value
+  const [totalAmount, setTotalAmount] = useState<number>(5); // Default value
 
   const addToCart = (product: Product) => {
-    const cartItem: CartItem = {
-      ...product,
-      quantity: 1,
-      total: product.price, // Initialize total when the item is added
-    };
-    setCartItems((prevItems) => [...prevItems, cartItem]);
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1, total: item.total + product.price }
+            : item
+        );
+      }
+      const cartItem: CartItem = {
+        ...product,
+        quantity: 1,
+        total: product.price,
+      };
+      return [...prevItems, cartItem];
+    });
   };
 
   const removeFromCart = (productId: number) => {
@@ -57,13 +64,24 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
   };
 
-  // Calculate cartSubtotal, shippingCharge, and totalAmount
+  const calculateShippingCharge = (subtotal: number): number => {
+    return subtotal > 50 ? 10 : 5;
+  };
+
   useEffect(() => {
+    const storedCart = localStorage.getItem("cartItems");
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
     const subtotal = cartItems.reduce((acc, item) => acc + item.total, 0);
     setCartSubtotal(subtotal);
 
-    // Example shipping charge logic (could be more complex based on your requirements)
-    const shipping = subtotal > 50 ? 10 : 5; // Shipping charge based on subtotal
+    const shipping = calculateShippingCharge(subtotal);
     setShippingCharge(shipping);
 
     const total = subtotal + shipping;
@@ -88,7 +106,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   );
 };
 
-// Custom hook to use the cart context
 export const useCart = () => {
   const context = React.useContext(CartContext);
   if (!context) {

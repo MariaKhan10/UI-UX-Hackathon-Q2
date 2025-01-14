@@ -47,7 +47,7 @@ const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
     },
     {
       id: 3,
-      name: "Country Burger",
+      name: "Country",
       description:
         "Savor the rustic flavors of our Country Burger, made with the finest ingredients for a truly wholesome experience. The juicy, perfectly seasoned patty is complemented by fresh, crisp veggies and rich, savory sauces. All of this is nestled in a soft, freshly baked bun. This hearty burger is sure to satisfy your hunger with every bite, offering a taste of tradition in every mouthful.",
       price: "300 Rupees/-",
@@ -185,49 +185,49 @@ const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
   }
 
   // Counter Component
-  const CounterWithCart = () => {
-    const [count, setCount] = useState(1);
+//   const CounterWithCart = () => {
+//     const [count, setCount] = useState(1);
 
-    const increment = () => setCount(count + 1);
-    const decrement = () => {
-      if (count > 1) setCount(count - 1);
-    };
+//     const increment = () => setCount(count + 1);
+//     const decrement = () => {
+//       if (count > 1) setCount(count - 1);
+//     };
 
-    return (
-      <div className="flex flex-col sm:flex-row items-center space-x-0 sm:space-x-4">
-  {/* Counter */}
-  <div className="flex items-center border border-gray-300 mb-4 sm:mb-0">
-    <button
-      onClick={decrement}
-      className="px-6 py-2 text-gray-700 hover:bg-gray-100 border-r border-gray-300"
-    >
-      -
-    </button>
-    <span className="px-4 py-2 text-gray-900">{count}</span>
-    <button
-      onClick={increment}
-      className="px-6 py-2 text-gray-700 hover:bg-gray-100 border-l border-gray-300"
-    >
-      +
-    </button>
-  </div>
+//     return (
+//       <div className="flex flex-col sm:flex-row items-center space-x-0 sm:space-x-4">
+//   {/* Counter */}
+//   <div className="flex items-center border border-gray-300 mb-4 sm:mb-0">
+//     <button
+//       onClick={decrement}
+//       className="px-6 py-2 text-gray-700 hover:bg-gray-100 border-r border-gray-300"
+//     >
+//       -
+//     </button>
+//     <span className="px-4 py-2 text-gray-900">{count}</span>
+//     <button
+//       onClick={increment}
+//       className="px-6 py-2 text-gray-700 hover:bg-gray-100 border-l border-gray-300"
+//     >
+//       +
+//     </button>
+//   </div>
 
-  {/* Add to Cart Button */}
-  <button className="flex items-center text-center justify-center m-auto bg-[#FF9F0D] text-white px-4 py-2 hover:bg-orange-600 w-full sm:w-auto">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      className="w-5 h-5 mr-2"
-    >
-      <path d="M16 20a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm-8 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm1.26-4h10.77a3.47 3.47 0 0 0 3.39-2.77l1.38-6A1 1 0 0 0 23 7H6.31L5.27 3.41A1 1 0 0 0 4.32 3H1a1 1 0 0 0 0 2h2.31l3.6 10.59a1 1 0 0 0 .95.68H18a1 1 0 1 0 0-2H8.46l-.27-.75ZM18.42 12H7.74L6.28 8h15.07l-1.38 6a1.47 1.47 0 0 1-1.45 1Z" />
-    </svg>
-    Add to Cart
-  </button>
-</div>
+//   {/* Add to Cart Button */}
+//   <button className="flex items-center text-center justify-center m-auto bg-[#FF9F0D] text-white px-4 py-2 hover:bg-orange-600 w-full sm:w-auto">
+//     <svg
+//       xmlns="http://www.w3.org/2000/svg"
+//       fill="currentColor"
+//       viewBox="0 0 24 24"
+//       className="w-5 h-5 mr-2"
+//     >
+//       <path d="M16 20a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm-8 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm1.26-4h10.77a3.47 3.47 0 0 0 3.39-2.77l1.38-6A1 1 0 0 0 23 7H6.31L5.27 3.41A1 1 0 0 0 4.32 3H1a1 1 0 0 0 0 2h2.31l3.6 10.59a1 1 0 0 0 .95.68H18a1 1 0 1 0 0-2H8.46l-.27-.75ZM18.42 12H7.74L6.28 8h15.07l-1.38 6a1.47 1.47 0 0 1-1.45 1Z" />
+//     </svg>
+//     Add to Cart
+//   </button>
+// </div>
 
-    );
-  };
+//     );
+//   };
 
   return (
     <div>
@@ -275,7 +275,7 @@ const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
           </span>
           <span className="text-gray-500 text-sm">(22 Reviews)</span>
         </div>
-        <CounterWithCart />
+        {/* <CounterWithCart /> */}
 
         <p className="border-b border-dotted border-gray-300"></p>
 
@@ -301,7 +301,7 @@ const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
               </svg>
             </button>
           </div>
-          <span className="text-lg text-gray-600">Category: Pizza</span>
+          <span className="text-lg text-gray-600">Category: </span>
           <br />
           <span className="text-lg text-gray-600">Tag: Our Shop</span>
         </div>
@@ -473,12 +473,12 @@ const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
     </div>
   </div>
 </div>
-
-
-
-    </div>
+ </div>
   </div>
+<Stillyouneed />
+<Footer />
 </div>
+
 
   );
 };
