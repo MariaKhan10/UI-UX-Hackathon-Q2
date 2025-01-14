@@ -166,7 +166,7 @@ const ShoppingCart = () => {
   
         <Link href="/Checkout">
           <button
-            className={`bg-[#FF9F0D] text-white font-bold w-full py-3 mt-5 ${
+            className={`bg-[#FF9F0D] text-white font-bold w-full py-3 mt-5 hover:bg-[#f58e4a] ${
               cartSubtotal === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
             disabled={cartSubtotal === 0}

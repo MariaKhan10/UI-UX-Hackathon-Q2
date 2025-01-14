@@ -54,7 +54,29 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const clearCart = () => {
     setCartItems([]);
+    localStorage.removeItem("cartItems"); // Local storage ko bhi clear karen
   };
+  
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cartItems");
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+    }
+  }, []);
+  
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  
+    const subtotal = cartItems.reduce((acc, item) => acc + item.total, 0);
+    setCartSubtotal(subtotal);
+  
+    const shipping = calculateShippingCharge(subtotal);
+    setShippingCharge(shipping);
+  
+    const total = subtotal + shipping;
+    setTotalAmount(total);
+  }, [cartItems]);
+  
 
   const updateCartItem = (productId: number, quantity: number) => {
     setCartItems((prevItems) =>
