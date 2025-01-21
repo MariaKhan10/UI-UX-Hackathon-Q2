@@ -7,57 +7,81 @@ import Footer from "../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../context/CartContext";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Product = {
   id: number;
   name: string;
   price: number;
   image: string;
+  category: string;
+  tags: string[];
 };
 
 const ShopList = () => {
- 
   const { addToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [priceRange, setPriceRange] = useState<number>(1000);
+  
 
   useEffect(() => {
-    fetch("/api/products") // Adjust API route if needed
+    fetch("/api/products") 
       .then((res) => res.json())
-      .then((data: Product[]) => setProducts(data))
+      .then((data: Product[]) => {
+        setProducts(data);
+        setFilteredProducts(data); 
+      })
       .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
+  useEffect(() => {
+    const filtered = products.filter((product) => {
+      const matchesSearch = product.name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const matchesCategory =
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(product.category);
+      const matchesPrice = product.price <= priceRange;
+  
+      console.log({
+        product,
+        matchesSearch,
+        matchesCategory,
+        matchesPrice,
+      });
+  
+      return matchesSearch && matchesCategory && matchesPrice;
+    });
+  
+    setFilteredProducts(filtered);
+  }, [searchTerm, selectedCategories, priceRange, products]);
+  
 
+  const handleAddToCart = (product: Product) => {
+    const cartItem = { ...product, quantity: 1, total: product.price };
 
-
-
-type CartItem = Product & { quantity: number; total: number };
-
-const handleAddToCart = (product: Product) => {
-  const cartItem: CartItem = {
-    ...product,
-    quantity: 1,
-    total: product.price, // Calculate total
+    addToCart(cartItem);
+    toast.success(`${product.name} added to cart!`, {
+      position: "top-right",
+      autoClose: 2000,
+    });
   };
 
-  console.log("Adding to cart:", cartItem); // Log for debugging
-  addToCart(cartItem); // Pass the cartItem to addToCart
-  
-  // Show toast notification
-  toast.success(`${product.name} added to cart!`, {
-    position: "top-right",
-    autoClose: 2000, // Duration in ms
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-  });
-};
-  
+  const toggleCategory = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((cat) => cat !== category)
+        : [...prev, category]
+    );
+  };
+
+
+ 
 
   return (
     <div>
@@ -71,78 +95,125 @@ const handleAddToCart = (product: Product) => {
         />
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-6 my-6 px-4">
-        <div className="flex items-center gap-2">
-          <label htmlFor="sort-by" className="text-sm font-medium text-gray-700">
-            Sort By:
-          </label>
-          <select
-            id="sort-by"
-            className="block w-48 bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            defaultValue="newest"
-          >
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-            <option value="popular">Most Popular</option>
-            <option value="rating">Highest Rating</option>
-          </select>
-        </div>
-        <div className="flex items-center gap-2">
-          <label htmlFor="show" className="text-sm font-medium text-gray-700">
-            Show:
-          </label>
-          <select
-            id="show"
-            className="block w-48 bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            defaultValue="default"
-          >
-            <option value="default">Default</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 sm:px-8 lg:px-24 mt-20 mb-20">
-        {products.map((product) => (
-          <div key={product.id} className="rounded shadow-lg p-4 bg-white">
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={312}
-              height={330}
-              className="rounded cursor-pointer"
+      <div className="flex flex-col-reverse lg:flex-row-reverse px-4 sm:px-8 lg:px-12 mt-16 mb-10 gap-8">
+        {/* Filter Sidebar */}
+        <div className="lg:w-1/4 bg-gray-50 p-6 shadow-lg rounded-md">
+          <div className="mb-6">
+            <label
+              htmlFor="search"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Search Product
+            </label>
+            <input
+              type="text"
+              id="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search product"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
             />
-            <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
-            <p className="text-gray-600">Price: Rs {product.price}</p>
-            <div className="flex gap-4 mt-4">
-              <Link
-                href={`/shop/${product.id}`}
-                className="bg-indigo-500 text-white py-2 px-6 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              >
-                View Details
-              </Link>
-              <button
-                onClick={() => handleAddToCart(product)}
-                className="flex items-center text-center justify-center m-auto bg-[#ff6a25] text-white px-4 py-2 rounded-md shadow-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
-              >
-                 <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      className="w-5 h-5 mr-2"
-    >
-      <path d="M16 20a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm-8 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm1.26-4h10.77a3.47 3.47 0 0 0 3.39-2.77l1.38-6A1 1 0 0 0 23 7H6.31L5.27 3.41A1 1 0 0 0 4.32 3H1a1 1 0 0 0 0 2h2.31l3.6 10.59a1 1 0 0 0 .95.68H18a1 1 0 1 0 0-2H8.46l-.27-.75ZM18.42 12H7.74L6.28 8h15.07l-1.38 6a1.47 1.47 0 0 1-1.45 1Z" />
-    </svg>
-                Add to Cart
-              </button>
+          </div>
+
+          <div className="mb-6">
+            <p className="text-sm font-medium text-gray-700 mb-2">Category</p>
+            {["Fast Food", "Bakery", "Dairy", "Drink", "Italian",].map(
+              (category) => (
+                <div key={category} className="flex items-center mb-2">
+                  <input
+                    type="checkbox"
+                    id={category}
+                    checked={selectedCategories.includes(category)}
+                    onChange={() => toggleCategory(category)}
+                    className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                  />
+                  <label
+                    htmlFor={category}
+                    className="ml-2 text-sm text-gray-700"
+                  >
+                    {category}
+                  </label>
+                </div>
+              )
+            )}
+          </div>
+
+
+          <div>
+            <Image src="/pictures/Banner.png" alt="img" width={250} height={250}></Image>
+          </div>
+          <br/>
+
+          <div className="mb-6">
+            <label
+              htmlFor="price-range"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Filter by Price
+            </label>
+            <input
+              type="range"
+              id="price-range"
+              min="0"
+              max="1000"
+              value={priceRange}
+              onChange={(e) => setPriceRange(Number(e.target.value))}
+              className="w-full"
+            />
+            <div className="flex justify-between text-sm text-gray-600 mt-2">
+              <span>0 Rupees</span>
+              <span>{priceRange} Rupees</span>
             </div>
           </div>
-        ))}
+          <div>
+            <p className="text-sm font-medium text-gray-700 mb-2">Product Tags</p>
+            <br/>
+            <div className="flex flex-wrap gap-2">
+              {["Healthy", "Drink", "Sandwiches", "Fast Food","Fresh", "Bakery","Cheesy","Dairy", "Creamy","Vegetarian", "Italian"].map((tag) => (
+                <span
+                  key={tag}
+                  className="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full cursor-pointer hover:bg-gray-300"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            </div>
+        </div>
+
+        {/* Products Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 mt-2 mb-9">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="rounded shadow-lg p-4 bg-white">
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={312}
+                height={330}
+                className="rounded cursor-pointer"
+              />
+              <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
+              <p className="text-gray-600">Price: Rs {product.price}</p>
+              <div className="flex gap-4 mt-4">
+                <Link
+                  href={`/shop/${product.id}`}
+                  className="bg-indigo-500 text-white text-sm px-5 py-2 rounded-lg shadow hover:bg-indigo-600"
+                >
+                  View Details
+                </Link>
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="bg-orange-500 text-white text-sm px-5 py-2 rounded-lg shadow hover:bg-orange-600"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-      <ToastContainer /> {/* Ensure this is rendered */}
+      
+      <ToastContainer />
       <Stillyouneed />
       <Footer />
     </div>

@@ -101,7 +101,7 @@ const Page = () => {
             Questions Look Here
           </h1>
           <p className="text-[#4F4F4F] font-normal text-base sm:text-lg leading-6 mt-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          Welcome to our FAQ section! Here, you'll find answers to the most common questions about our platform, services, and policies. Whether you're a new user or a returning customer, we've got you covered.
           </p>
         </div>
 

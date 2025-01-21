@@ -11,7 +11,7 @@ import Link from "next/link";
 const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
   const { id } = params; // Get the product ID from the dynamic route
 
-  // Sample product data for multiple products
+  
   const products = [
     {
       id: 1,
