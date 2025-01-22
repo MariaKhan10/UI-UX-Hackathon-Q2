@@ -22,7 +22,6 @@ const Foods = () => {
         const data = await client.fetch(
           `*[_type == "food"]{
             name,
-            originalPrice,
             category,
             available,
             image,
