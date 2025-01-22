@@ -1,13 +1,10 @@
 "use client";
 import Image from "next/image";
-import { FiSearch,} from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 import { Great_Vibes } from "@next/font/google";
 import Link from "next/link";
 import React, { useState } from "react";
-import {FiMenu } from "react-icons/fi";
-
-
-
+import { FiMenu } from "react-icons/fi";
 
 const greatVibes = Great_Vibes({
   weight: ["400"],
@@ -23,7 +20,7 @@ const Hero = () => {
   const toggleShopDropdown = () => {
     setIsShopOpen((prev) => !prev);
   };
-  
+
   const togglePagesDropdown = () => {
     setIsPagesOpen((prev) => !prev);
   };
@@ -94,15 +91,6 @@ const Hero = () => {
             </span>
           </div>
 
-
-
-
-
-
-
-
-
-
           {/* Navbar */}
           <div className="w-full max-w-6xl mt-4">
             <div className="flex justify-between items-center">
@@ -114,158 +102,112 @@ const Hero = () => {
                   <FiMenu />
                 </button>
               </div>
-             <ul className="hidden md:flex space-x-6 text-[#FFFFFF] relative">
-  <li className="hover:text-[#FF9F0D]">
-    <Link href="/">Home</Link>
-  </li>
-  <li className="hover:text-[#FF9F0D]">
-    <Link href="/Menu">Menu</Link>
-  </li>
-  <li className="hover:text-[#FF9F0D]">
-    <Link href="/Blogs">Blog</Link>
-  </li>
+              <ul className="hidden md:flex space-x-6 text-[#FFFFFF] relative">
+                <li className="hover:text-[#FF9F0D]">
+                  <Link href="/">Home</Link>
+                </li>
+                <li className="hover:text-[#FF9F0D]">
+                  <Link href="/Menu">Menu</Link>
+                </li>
+                <li className="hover:text-[#FF9F0D]">
+                  <Link href="/Blogs">Blog</Link>
+                </li>
 
+                {/* Pages  */}
 
-
-
-
-{/* Pages  */}
-
-
-
-  
-
-<li className="hover:text-[#FF9F0D] relative">
-  <button
-    onClick={(e) => {
-      e.stopPropagation(); // Prevent closing when clicking the button
-      togglePagesDropdown();
-    }}
-    className="flex justify-center items-center w-full hover:text-[#FF9F0D] focus:outline-none"
-  >
-    Pages
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className={`ml-2 w-4 h-4 transition-transform ${
-        isPagesOpen ? "rotate-180" : "rotate-0"
-      }`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path
-        fillRule="evenodd"
-        d="M5.293 7.707a1 1 0 011.414 0L10 11.586l3.293-3.879a1 1 0 011.414 1.415l-4 4.667a1 1 0 01-1.414 0l-4-4.667a1 1 0 010-1.415z"
-        clipRule="evenodd"
-      />
-    </svg>
-  </button>
-  {isPagesOpen && (
-    <ul className="absolute top-full left-1/2 transform -translate-x-1/2 bg-[#FFFFFF] text-[#000000] mt-1 space-y-2 py-2 shadow-lg rounded z-50">
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/Ourchefs">Our Chefs</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/Signin">Sign In</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/Signup">Sign Up</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/Checkout">Checkout</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/BlogDetails">BlogDetails</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/FAQ">FAQ</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                <li className="hover:text-[#FF9F0D] relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent closing when clicking the button
+                      togglePagesDropdown();
+                    }}
+                    className="flex justify-center items-center w-full hover:text-[#FF9F0D] focus:outline-none"
+                  >
+                    Pages
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`ml-2 w-4 h-4 transition-transform ${
+                        isPagesOpen ? "rotate-180" : "rotate-0"
+                      }`}
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.707a1 1 0 011.414 0L10 11.586l3.293-3.879a1 1 0 011.414 1.415l-4 4.667a1 1 0 01-1.414 0l-4-4.667a1 1 0 010-1.415z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isPagesOpen && (
+                    <ul className="absolute top-full left-1/2 transform -translate-x-1/2 bg-[#FFFFFF] text-[#000000] mt-1 space-y-2 py-2 shadow-lg rounded z-50">
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/Ourchefs">Our Chefs</Link>
+                      </li>
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/Signin">Sign In</Link>
+                      </li>
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/Signup">Sign Up</Link>
+                      </li>
+                      {/* <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/Checkout">Checkout</Link>
+                      </li> */}
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/BlogDetails">BlogDetails</Link>
+                      </li>
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/FAQ">FAQ</Link>
+                      </li>
+                      {/* <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/404">404</Link>
-      </li>
-    </ul>
-  )}
-</li>
+      </li> */}
+                    </ul>
+                  )}
+                </li>
+                <li className="hover:text-[#FF9F0D]">
+                  <Link href="/About">About</Link>
+                </li>
+                <li className="hover:text-[#FF9F0D] relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent closing when clicking the button
+                      toggleShopDropdown();
+                    }}
+                    className="flex justify-center items-center w-full hover:text-[#FF9F0D] focus:outline-none"
+                  >
+                    Shop
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`ml-2 w-4 h-4 transition-transform ${
+                        isShopOpen ? "rotate-180" : "rotate-0"
+                      }`}
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.707a1 1 0 011.414 0L10 11.586l3.293-3.879a1 1 0 011.414 1.415l-4 4.667a1 1 0 01-1.414 0l-4-4.667a1 1 0 010-1.415z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isShopOpen && (
+                    <ul className="absolute top-full left-1/2 transform -translate-x-1/2 bg-[#FFFFFF] text-[#000000] mt-1 space-y-2 py-2 shadow-lg rounded z-50">
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/ShopList">Shop List</Link>
+                      </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <li className="hover:text-[#FF9F0D]">
-    <Link href="/About">About</Link>
-  </li>
-
-
-
-
-
-
-  <li className="hover:text-[#FF9F0D] relative">
-  <button
-    onClick={(e) => {
-      e.stopPropagation(); // Prevent closing when clicking the button
-      toggleShopDropdown();
-    }}
-    className="flex justify-center items-center w-full hover:text-[#FF9F0D] focus:outline-none"
-  >
-    Shop
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className={`ml-2 w-4 h-4 transition-transform ${
-        isShopOpen ? "rotate-180" : "rotate-0"
-      }`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path
-        fillRule="evenodd"
-        d="M5.293 7.707a1 1 0 011.414 0L10 11.586l3.293-3.879a1 1 0 011.414 1.415l-4 4.667a1 1 0 01-1.414 0l-4-4.667a1 1 0 010-1.415z"
-        clipRule="evenodd"
-      />
-    </svg>
-  </button>
-  {isShopOpen && (
-    <ul className="absolute top-full left-1/2 transform -translate-x-1/2 bg-[#FFFFFF] text-[#000000] mt-1 space-y-2 py-2 shadow-lg rounded z-50">
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/ShopList">Shop List</Link>
-      </li>
-      
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/ShoppingCart">Shopping Cart</Link>
-      </li>
-      
-    </ul>
-  )}
-</li>
-
-
-
-
-
-
-
-
-
-
-  <li className="hover:text-[#FF9F0D]">
-    <Link href="/Contact">Contact</Link>
-  </li>
-</ul>
-
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/ShoppingCart">Shopping Cart</Link>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+                <li className="hover:text-[#FF9F0D]">
+                  <Link href="/Contact">Contact</Link>
+                </li>
+              </ul>
 
               {/* Search Bar */}
               <div className="hidden md:flex relative items-center w-80 bg-transparent rounded-full overflow-hidden border border-[#FF9F0D]">
@@ -290,129 +232,101 @@ const Hero = () => {
                 <li className="hover:text-[#FF9F0D]">
                   <Link href="/Blogs">Blog</Link>
                 </li>
-                
-
-
-
-
-
-
-
-
-
-
                 <li className="hover:text-[#FF9F0D] relative">
-  <button
-    onClick={(e) => {
-      e.stopPropagation(); // Prevent closing when clicking the button
-      togglePagesDropdown();
-    }}
-    className="flex w-full hover:text-[#FF9F0D] focus:outline-none"
-  >
-    Pages
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className={`ml-0 mt-1 w-4 h-4 transition-transform ${
-        isPagesOpen ? "rotate-180" : "rotate-0"
-      }`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path
-        fillRule="evenodd"
-        d="M5.293 7.707a1 1 0 011.414 0L10 11.586l3.293-3.879a1 1 0 011.414 1.415l-4 4.667a1 1 0 01-1.414 0l-4-4.667a1 1 0 010-1.415z"
-        clipRule="evenodd"
-      />
-    </svg>
-  </button>
-  {isPagesOpen && (
-    <ul className="absolute top-full left-0 ml-14 bg-[#FFFFFF] text-[#000000] space-y-2 py-2 shadow-lg rounded z-50">
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/Ourchefs">Ourchefs</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/Signin">Signin</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/Signup">Signup</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/Checkout">Checkout</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/BlogDetails">BlogDetails</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/FAQ">FAQ</Link>
-      </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent closing when clicking the button
+                      togglePagesDropdown();
+                    }}
+                    className="flex w-full hover:text-[#FF9F0D] focus:outline-none"
+                  >
+                    Pages
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`ml-0 mt-1 w-4 h-4 transition-transform ${
+                        isPagesOpen ? "rotate-180" : "rotate-0"
+                      }`}
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.707a1 1 0 011.414 0L10 11.586l3.293-3.879a1 1 0 011.414 1.415l-4 4.667a1 1 0 01-1.414 0l-4-4.667a1 1 0 010-1.415z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isPagesOpen && (
+                    <ul className="absolute top-full left-0 ml-14 bg-[#FFFFFF] text-[#000000] space-y-2 py-2 shadow-lg rounded z-50">
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/Ourchefs">Ourchefs</Link>
+                      </li>
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/Signin">Signin</Link>
+                      </li>
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/Signup">Signup</Link>
+                      </li>
+                      {/* <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/Checkout">Checkout</Link>
+                      </li> */}
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/BlogDetails">BlogDetails</Link>
+                      </li>
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/FAQ">FAQ</Link>
+                      </li>
+                      {/* <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/404">404</Link>
-      </li>
-    </ul>
-  )}
-</li>
-
-
-
-
-
+      </li> */}
+                    </ul>
+                  )}
+                </li>
                 <li className="hover:text-[#FF9F0D]">
                   <Link href="/About">About</Link>
                 </li>
                 <li className="hover:text-[#FF9F0D] relative">
-  <button
-    onClick={(e) => {
-      e.stopPropagation(); // Prevent closing when clicking the button
-      toggleShopDropdown();
-    }}
-    className="flex w-full hover:text-[#FF9F0D] focus:outline-none"
-  >
-    Shop
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className={`ml-0 mt-1 w-4 h-4 transition-transform ${
-        isShopOpen ? "rotate-180" : "rotate-0"
-      }`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path
-        fillRule="evenodd"
-        d="M5.293 7.707a1 1 0 011.414 0L10 11.586l3.293-3.879a1 1 0 011.414 1.415l-4 4.667a1 1 0 01-1.414 0l-4-4.667a1 1 0 010-1.415z"
-        clipRule="evenodd"
-      />
-    </svg>
-  </button>
-  {isShopOpen && (
-    <ul className="absolute top-full left-0 ml-14 bg-[#FFFFFF] text-[#000000] space-y-2 py-2 shadow-lg rounded z-50">
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/ShopList">Shop List</Link>
-      </li>
-      
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
-        <Link href="/ShoppingCart">Shopping Cart</Link>
-      </li>
-    </ul>
-  )}
-</li>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent closing when clicking the button
+                      toggleShopDropdown();
+                    }}
+                    className="flex w-full hover:text-[#FF9F0D] focus:outline-none"
+                  >
+                    Shop
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`ml-0 mt-1 w-4 h-4 transition-transform ${
+                        isShopOpen ? "rotate-180" : "rotate-0"
+                      }`}
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.707a1 1 0 011.414 0L10 11.586l3.293-3.879a1 1 0 011.414 1.415l-4 4.667a1 1 0 01-1.414 0l-4-4.667a1 1 0 010-1.415z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isShopOpen && (
+                    <ul className="absolute top-full left-0 ml-14 bg-[#FFFFFF] text-[#000000] space-y-2 py-2 shadow-lg rounded z-50">
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/ShopList">Shop List</Link>
+                      </li>
 
-
-
-
-
-
+                      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+                        <Link href="/ShoppingCart">Shopping Cart</Link>
+                      </li>
+                    </ul>
+                  )}
+                </li>
                 <li className="hover:text-[#FF9F0D]">
                   <Link href="/Contact">Contact</Link>
                 </li>
               </ul>
             )}
           </div>
-
-
-
-
-
-
           {/* Main Content */}
           <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-6xl mt-16">
             {/* Left Side */}
@@ -437,13 +351,11 @@ const Hero = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius
                 sed pharetra dictum neque massa congue
               </p>
-             <Link href="/Menu">
-             <button className="w-[160px] md:w-[190px] h-[50px] md:h-[60px] mt-6 md:mt-8 bg-[#FF9F0D] text-white rounded-3xl hover:bg-[#ff9e0da9]">
-                See Menu
-              </button></Link>
-              
-              
-
+              <Link href="/Menu">
+                <button className="w-[160px] md:w-[190px] h-[50px] md:h-[60px] mt-6 md:mt-8 bg-[#FF9F0D] text-white rounded-3xl hover:bg-[#ff9e0da9]">
+                  See Menu
+                </button>
+              </Link>
             </div>
 
             {/* Right Side */}

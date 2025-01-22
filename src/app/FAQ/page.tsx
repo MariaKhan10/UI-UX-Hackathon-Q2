@@ -98,7 +98,7 @@ const Page = () => {
       <div className="px-4 py-10 sm:px-10 lg:p-28">
         <div className="text-center">
           <h1 className="text-[#333333] font-bold text-3xl sm:text-4xl leading-[1.2]">
-            Questions Look Here
+            Questions ? Look Here..!!
           </h1>
           <p className="text-[#4F4F4F] font-normal text-base sm:text-lg leading-6 mt-2">
           Welcome to our FAQ section! Here, you'll find answers to the most common questions about our platform, services, and policies. Whether you're a new user or a returning customer, we've got you covered.

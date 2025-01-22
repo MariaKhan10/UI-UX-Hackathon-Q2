@@ -56,5 +56,6 @@ export default {
       title: 'Available',
       description: 'Availability status of the food item',
     },
+   
   ],
 };

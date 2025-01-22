@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Hero from "./components/Hero";
 import Createthebest from "./components/Createthebest";
 import Footer from "./components/Footer";
@@ -11,6 +10,10 @@ import BlogPost from "./components/BlogPost";
 import Wedocument from "./components/Wedocument";
 import Testimonials from "./components/Testimonials";
 import Chooseandpick from "./components/Chooseandpick";
+
+
+
+
 
 export default function Home() {
   return (

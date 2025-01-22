@@ -73,25 +73,6 @@ const Navbar = () => {
             <Link href="/Blogs">Blog</Link>
           </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <li className="hover:text-[#FF9F0D] relative">
   <button
     onClick={(e) => {
@@ -127,64 +108,21 @@ const Navbar = () => {
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/Signup">Sign Up</Link>
       </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+      {/* <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/Checkout">Checkout</Link>
-      </li>
+      </li> */}
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/BlogDetails">BlogDetails</Link>
       </li>
       <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/FAQ">FAQ</Link>
       </li>
-      <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
+      {/* <li className="hover:bg-[#FF9F0D] hover:text-[#FFFFFF] px-4">
         <Link href="/404">404</Link>
-      </li>
+      </li> */}
     </ul>
   )}
 </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <li className="hover:text-[#FF9F0D]">
             <Link href="/About">About</Link>
           </li>

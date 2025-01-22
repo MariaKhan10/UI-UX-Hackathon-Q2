@@ -43,9 +43,7 @@ async function importData() {
     $Promise.push(
       axios.get('https://sanity-nextjs-rouge.vercel.app/api/foods')
     );
-    $Promise.push(
-      axios.get('https://sanity-nextjs-rouge.vercel.app/api/chefs')
-    );
+   
 
     const [foodsResponse, chefsResponse] = await Promise.all($Promise);
     const foods = foodsResponse.data;
