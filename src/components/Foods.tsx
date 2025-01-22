@@ -14,22 +14,28 @@ const greatVibes = Great_Vibes({
 
 const Foods = () => {
   const [foods, setFoods] = useState<any[]>([]);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     async function fetchFoods() {
-      const data = await client.fetch(
-        `*[_type == "food"]{
-          name,
-          originalPrice,
-          category,
-          available,
-          image,
-          description,
-          price,
-          _id
-        }`
-      );
-      setFoods(data);
+      try {
+        const data = await client.fetch(
+          `*[_type == "food"]{
+            name,
+            originalPrice,
+            category,
+            available,
+            image,
+            description,
+            price,
+            _id
+          }`
+        );
+        setFoods(data);
+      } catch (err) {
+        setError("Failed to load food data. Please try again later.");
+        console.error("Error fetching food data:", err);
+      }
     }
     fetchFoods();
   }, []);
@@ -40,6 +46,12 @@ const Foods = () => {
         Food Menu
       </h1>
       
+      {error && (
+        <div className="text-red-500 text-center mt-4">
+          <p>{error}</p>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         {foods.map((food) => (
           <div
