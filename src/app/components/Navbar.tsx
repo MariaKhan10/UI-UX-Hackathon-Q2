@@ -7,13 +7,16 @@ import { PiTote } from "react-icons/pi";
 import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart(); 
+  
 
   // Calculate total items in the cart
-  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  const totalItems = cartItems.length; // Total items ko count karna
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isShopOpen, setIsShopOpen] = useState(false); // State for "Shop" dropdown
    const [isPagesOpen, setIsPagesOpen] = useState(false);
+
+
 
   const toggleShopDropdown = () => {
     setIsShopOpen(!isShopOpen);

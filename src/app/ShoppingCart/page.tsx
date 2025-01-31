@@ -96,7 +96,7 @@ const ShoppingCart = () => {
         <p className="text-[#333333] font-bold text-[16px] sm:text-[18px]">{item.name}</p>
       </div>
 
-      <p className="text-[#333333] font-bold text-[16px] sm:text-[18px]">${item.price.toFixed(2)}</p>
+      <p className="text-[#333333] font-bold text-[16px] sm:text-[18px]">{item.price.toFixed(2)} Rupees</p>
 
       <div className="flex justify-center">
         <div className="flex flex-row items-center border border-gray-300 rounded-full p-1 w-fit space-x-3">
@@ -116,10 +116,10 @@ const ShoppingCart = () => {
         </div>
       </div>
 
-      <p className="text-[#333333] font-bold text-[16px] sm:text-[18px]">${(item.price * item.quantity).toFixed(2)}</p>
+      <p className="text-[#333333] font-bold text-[16px] sm:text-[18px]">{(item.price * item.quantity).toFixed(2)} Rupees</p>
 
       <RxCross1
-        className="cursor-pointer text-2xl text-[#FF9F0D] hover:text-red-600 mx-auto"
+        className="cursor-pointer text-3xl text-[#FF9F0D] hover:text-red-600 mx-auto"
         onClick={() => removeFromCart(item.id)}
       />
     </div>
@@ -151,16 +151,16 @@ const ShoppingCart = () => {
         <div className="mt-4 space-y-4">
           <div className="flex justify-between">
             <p className="font-bold text-[16px] sm:text-[20px]">Cart Subtotal</p>
-            <p className="font-bold text-[16px] sm:text-[20px]">${cartSubtotal.toFixed(2)}</p>
+            <p className="font-bold text-[16px] sm:text-[20px]">{cartSubtotal.toFixed(2)} Rupees</p>
           </div>
           <div className="flex justify-between">
             <p className="text-[14px] sm:text-[18px]">Shipping Charge</p>
-            <p className="text-[14px] sm:text-[18px]">${shippingCharge.toFixed(2)}</p>
+            <p className="text-[14px] sm:text-[18px]">{shippingCharge.toFixed(2)} Rupees</p>
           </div>
           <hr className="border-gray-300" />
           <div className="flex justify-between">
             <p className="font-bold text-[16px] sm:text-[20px]">Total Amount</p>
-            <p className="font-bold text-[16px] sm:text-[20px]">${totalAmount.toFixed(2)}</p>
+            <p className="font-bold text-[16px] sm:text-[20px]">{totalAmount.toFixed(2)} Rupees</p>
           </div>
         </div>
   
@@ -217,7 +217,7 @@ const ProductRow = ({
     </div>
 
     <p className="text-[#333333] font-bold text-[16px] sm:text-[18px] lg:text-center">
-      ${product.price.toFixed(2)}
+      {product.price.toFixed(2)} Rupees
     </p>
 
     <div className="flex justify-center">
@@ -239,7 +239,7 @@ const ProductRow = ({
     </div>
 
     <p className="text-[#333333] font-bold text-[16px] sm:text-[18px]">
-      ${product.total.toFixed(2)}
+      {product.total.toFixed(2)} Rupees
     </p>
 
     <RxCross1

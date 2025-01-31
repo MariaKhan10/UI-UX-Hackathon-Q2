@@ -1,17 +1,24 @@
 "use client";
-"use client";
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Stillyouneed from "../components/Stillyouneed";
 import Footer from "../components/Footer";
 import Image from "next/image";
-import Link from "next/link";
 import { useCart } from "../context/CartContext";
+import Link from "next/link";
+import OrderReceipt from "../components/OrderReceipt";
+
 
 const Page = () => {
   const { cartItems, cartSubtotal, shippingCharge, totalAmount } = useCart();
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [bankDetails, setBankDetails] = useState({
+    accountName: "",
+    accountNumber: "",
+    bankName: "",
+  });
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
@@ -25,13 +32,60 @@ const Page = () => {
     address2: "",
   });
 
+  const [errorMessages, setErrorMessages] = useState({
+    email: "",
+    phoneNumber: "",
+    zipCode: "",
+    firstName: "",
+    lastName: "",
+    company: "",
+    address1: "",
+    address2: ""
+  });
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
+    let sanitizedValue = value;
+    let newErrorMessages = { ...errorMessages };
+
+    // Sanitize input values and validate fields
+    if (name === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      sanitizedValue = value; 
+
+      if (!value.includes("@")) {
+        newErrorMessages.email = "Email must contain '@'";
+      } else if (!emailRegex.test(value) && value.length > 0) {
+        newErrorMessages.email = "Invalid email format";
+      } else {
+        newErrorMessages.email = "";
+      }
+
+    } else if (name === "phoneNumber") {
+      sanitizedValue = value.replace(/[^0-9]/g, "");
+    } else if (name === "zipCode") {
+      sanitizedValue = value.replace(/[^0-9]/g, "");
+    } else if (["firstName", "lastName", "company"].includes(name)) {
+      sanitizedValue = value.replace(/[^a-zA-Z\s]/g, "");
+    } else if (["address1", "address2"].includes(name)) {
+      sanitizedValue = value.replace(/[<>]/g, ""); // Remove any HTML tags
+    }
+
+    setFormValues((prev) => ({ ...prev, [name]: sanitizedValue }));
+    setErrorMessages(newErrorMessages); // Update error messages
+  };
+
+  const handleBankDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setBankDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedPaymentMethod(e.target.value);
   };
 
   const handlePlaceOrder = () => {
-    // Check if all required fields are filled
+    // Validate required fields
     if (
       !formValues.firstName ||
       !formValues.lastName ||
@@ -41,49 +95,54 @@ const Page = () => {
       !formValues.country ||
       !formValues.city ||
       !formValues.zipCode ||
-      !formValues.zipCode ||
       !formValues.address1
     ) {
-      setErrorMessage("Please fill in all required shipping address details before placing the order.");
+      setErrorMessage("Please fill in all required shipping address details.");
       setOrderPlaced(false);
       return;
     }
 
-    // Clear error message if form is valid
+    // Validate selected payment method
+    if (!selectedPaymentMethod) {
+      setErrorMessage("Please select a payment method.");
+      setOrderPlaced(false);
+      return;
+    }
+
+    // Validate bank details for bank transfer
+    if (
+      selectedPaymentMethod === "bankTransfer" &&
+      (!bankDetails.accountName || !bankDetails.accountNumber || !bankDetails.bankName)
+    ) {
+      setErrorMessage("Please fill in all bank transfer details.");
+      setOrderPlaced(false);
+      return;
+    }
+
+    // If all validations pass
     setErrorMessage("");
     setOrderPlaced(true);
-
-    // Optional: Hide the success message after a few seconds
-    setTimeout(() => setOrderPlaced(false), 3000);
+  
   };
+
+  
 
   return (
     <div>
       <Navbar />
       <div className="relative">
-        {/* First Image */}
-        <Image
-          src="/pictures/ourmenu.png"
-          alt="menu"
-          width={1920}
-          height={550}
-          className="w-full object-cover"
-        />
-
-        {/* Second Image (Centered) */}
+        <Image src="/pictures/ourmenu.png" alt="menu" width={1920} height={550} className="w-full object-cover" />
         <div className="absolute inset-0 flex justify-center items-center">
           <h1 className="text-white font-bold text-[20px]">Check out Page</h1>
         </div>
       </div>
-
-      {/* Left Section Starts */}
       <div className="flex flex-col sm:flex-row p-16 sm:px-14 sm:py-10 gap-6">
         <div className="w-full sm:w-1/2">
           <h1 className="text-xl font-bold text-gray-700 mb-4 mt-2">Shipping Address</h1>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
-            {/* First Name */}
-            <div>
+            {/*shipping address inputs */}
+             {/* First Name */}
+             <div>
               <label htmlFor="firstName" className="text-gray-700 font-medium">
                 First Name
               </label>
@@ -128,6 +187,7 @@ const Page = () => {
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
               />
+              {errorMessages.email && <span>{errorMessages.email}</span>}
             </div>
 
             
@@ -256,6 +316,8 @@ const Page = () => {
               />
             </div>
           </div>
+
+          
              {/* Billing Address */}
              <div className="mt-10">
             <h1 className="text-xl font-bold text-gray-700 mb-4 mt-2">Billing Address</h1>
@@ -285,81 +347,134 @@ const Page = () => {
     </button>
   </Link>
 
-  {/* Proceed to Shipping Button */}
-  <Link href="">
-    <button
-      className="flex items-center justify-center bg-[#FF9F0D] text-white hover:bg-[#e88d0c] focus:ring-2 focus:ring-orange-400"
-      style={{ width: '260px', height: '48px' }}
-    >
-      Proceed to shipping <span className="text-xl ml-2">&gt;</span>
-    </button>
-  </Link>
+  
+
+</div>
+          </div>
+          </div>
+          
+
+       
+{/* Right Section Starts  */}
+<div className="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-6 py-6 gap-6 rounded-lg shadow-lg mt-10 sm:mt-20 bg-white border border-gray-200">
+  <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4 text-center sm:text-left">
+    Order Summary
+  </h2>
+
+  <ul className="space-y-4">
+    {cartItems.map((item) => (
+      <li
+        key={item.id}
+        className="flex flex-col sm:flex-row items-center justify-between p-3 bg-gray-100 rounded-lg"
+      >
+        <div className="flex items-center gap-4">
+          <img
+            src={item.image}
+            alt={item.name}
+            width={50}
+            height={50}
+            className="rounded-md shadow-md object-cover"
+          />
+          <span className="text-gray-700 font-medium text-sm sm:text-base">{item.name}</span>
+        </div>
+        <span className="text-gray-900 font-semibold text-sm sm:text-sm sm:ml-4 min-w-[80px] text-right">
+    {item.total.toFixed(2)} Rupees
+  </span>
+      </li>
+    ))}
+  </ul>
+
+  <div className="flex justify-between text-base sm:text-lg font-bold text-gray-800 mt-6 border-t pt-4">
+    <span>Total</span>
+    <span className="text-blue-600">{totalAmount.toFixed(2)} Rupees</span>
+  </div>
 </div>
 
 
+{/* Payment Method Section */}
+<div className="mt-8 p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+  <h2 className="text-xl font-semibold text-gray-800 mb-4">Payment Method</h2>
+  <div className="space-y-3">
+    <label className="flex items-center gap-3 cursor-pointer text-gray-700 font-medium">
+      <input
+        type="radio"
+        value="cod"
+        name="paymentMethod"
+        checked={selectedPaymentMethod === "cod"}
+        onChange={handlePaymentMethodChange}
+        className="accent-blue-500 w-5 h-5"
+      />
+      Cash on Delivery (COD)
+    </label>
 
-          </div>
-        </div>
+    <label className="flex items-center gap-3 cursor-pointer text-gray-700 font-medium">
+      <input
+        type="radio"
+        value="bankTransfer"
+        name="paymentMethod"
+        checked={selectedPaymentMethod === "bankTransfer"}
+        onChange={handlePaymentMethodChange}
+        className="accent-blue-500 w-5 h-5"
+      />
+      Bank Transfer
+    </label>
+  </div>
 
+  {selectedPaymentMethod === "bankTransfer" && (
+    <div className="mt-6 space-y-3">
+      <h2 className="font-bold text-gray-700">Bank Details</h2>
+      <input
+        type="text"
+        name="bankName"
+        placeholder="Bank Name"
+        value={bankDetails.bankName}
+        onChange={handleBankDetailsChange}
+        className="border border-gray-300 focus:ring-2 focus:ring-blue-400 rounded-md px-4 py-2 text-gray-800 w-full"
+      />
+      <input
+        type="text"
+        name="accountName"
+        placeholder="Account Name"
+        value={bankDetails.accountName}
+        onChange={handleBankDetailsChange}
+        className="border border-gray-300 focus:ring-2 focus:ring-blue-400 rounded-md px-4 py-2 text-gray-800 w-full"
+      />
+      <input
+        type="text"
+        name="accountNumber"
+        placeholder="Account Number"
+        value={bankDetails.accountNumber}
+        onChange={handleBankDetailsChange}
+        className="border border-gray-300 focus:ring-2 focus:ring-blue-400 rounded-md px-4 py-2 text-gray-800 w-full"
+      />
+    </div>
+  )}
 
-        {/* Right Section Starts */}
-        <div className="w-full sm:w-1/3 px-8 py-6 gap-6 rounded-lg shadow-md mt-20 bg-white">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Order Summary</h2>
+  <button
+    className="bg-[#FF9F0D] text-white hover:bg-[#f7c780] transition-all font-medium rounded-md px-10 py-3 mt-6 w-full shadow-md"
+    onClick={handlePlaceOrder}
+  >
+    Place Order
+  </button>
 
-          <ul className="space-y-4">
-            {cartItems.map((item) => (
-              <li key={item.id} className="flex justify-between text-gray-700">
-                <span>{item.name}</span>
-                <span>${item.total.toFixed(2)}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="flex justify-between text-lg font-bold text-gray-800 mt-4">
-            <span>Total</span>
-            <span>${totalAmount.toFixed(2)}</span>
-          </div>
-
-          <button
-            onClick={handlePlaceOrder}
-            className="flex items-center justify-between w-full bg-[#FF9F0D] text-white hover:bg-[#e88d0c] focus:ring-2 focus:ring-orange-400 px-8 py-4 rounded-md mt-10"
-          >
-            <span>Place an Order</span>
-            <span className="text-xl">&rarr;</span>
-          </button>
-
-          {errorMessage && (
-            <div className="mt-6 p-4 rounded-md bg-red-100 text-red-800 text-center shadow-md">
-              {errorMessage}
-            </div>
-          )}
+  {errorMessage && <p className="text-red-500 mt-4 text-center">{errorMessage}</p>}
+</div>
 
 {orderPlaced && (
-  <div className="mt-6 p-6 rounded-lg bg-gradient-to-r from-green-400 to-green-500 text-white text-center shadow-lg flex items-center justify-center gap-4">
-   <svg
-  xmlns="http://www.w3.org/2000/svg"
-  className="h-12 w-12 text-white"
-  viewBox="0 0 20 20"
-  fill="currentColor"
->
-  <path
-    fillRule="evenodd"
-    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-    clipRule="evenodd"
-  />
-</svg>
-
-    <span className="font-semibold text-lg">
-      Your order has been placed successfully!
-    </span>
-  </div>
-)}
-
-
+        <OrderReceipt
+          orderPlaced={orderPlaced}
+          formValues={formValues}
+          cartItems={cartItems}
+          selectedPaymentMethod={selectedPaymentMethod}
+          bankDetails={bankDetails}
+          cartSubtotal={cartSubtotal}
+          shippingCharge={shippingCharge}
+          totalAmount={totalAmount}
+        />
+      )}
         </div>
-      </div>
-
-      <Stillyouneed />
+        
+<Stillyouneed />
       <Footer />
     </div>
   );
