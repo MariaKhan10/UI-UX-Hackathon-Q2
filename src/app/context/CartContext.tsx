@@ -8,7 +8,12 @@ type Product = {
   image: string;
 };
 
-type CartItem = Product & { quantity: number; total: number };
+type CartItem = Product & { 
+  _key?: string;  // ✅ Optional _key added
+  quantity: number; 
+  total: number; 
+};
+
 
 type CartContextType = {
   cartItems: CartItem[];

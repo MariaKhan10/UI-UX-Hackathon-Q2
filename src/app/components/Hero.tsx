@@ -370,8 +370,7 @@ const Hero = () => {
                 food Quality
               </p>
               <p className="text-[#FFFFFF] font-normal text-[14px] md:text-[16px] leading-6 mt-4 md:mt-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius
-                sed pharetra dictum neque massa congue
+              "Fresh and delicious food delivered to your doorstep. Savor every bite with FoodTuck!"
               </p>
               <Link href="/Menu">
                 <button className="w-[160px] md:w-[190px] h-[50px] md:h-[60px] mt-6 md:mt-8 bg-[#FF9F0D] text-white rounded-3xl hover:bg-[#ff9e0da9]">
